@@ -49,7 +49,7 @@ h3 {
 }
 
 .invader {
-    background-color: purple ;
+    background: radial-gradient(circle, gray 0%, purple 50%, black 100%);
     border-radius: 20px;
 }
 

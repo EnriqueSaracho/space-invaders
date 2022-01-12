@@ -110,12 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        /*document.addEventListener('keyup', e => {
-            switch (e.key) {
-                case ' ':
-                    laserId = setInterval(moveLaser, 100)
-            }
-        })*/
+        
         switch (e.key) {
             case ' ':
                 laserId = setInterval(moveLaser, 100)
