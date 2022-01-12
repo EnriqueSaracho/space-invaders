@@ -38,22 +38,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //move the alien invaders
     function moveInvaders() {
-        const leftEdge = alienInvaders[0] % width === 0
-        const rightEdge = alienInvaders[alienInvaders.length - 1] % width === width - 1
+        const leftEdge = alienInvaders[0] % width === 0 //condition, it verifies that the left side of the invaders is touching the left side of the grid
+        const rightEdge = alienInvaders[alienInvaders.length - 1] % width === width - 1 //the same condition but for the right side
 
         if ((leftEdge && direction === -1) || (rightEdge && direction === 1)) {
-            direction = width
+            direction = width //it its touching the side of the grid, the direction equals width so that it moves down one block
         } else if (direction === width) {
             if (leftEdge) direction = 1
             else direction = -1
         }
-        for (let i = 0; i <= alienInvaders.length - 1; i++) {
+        for (let i = 0; i < alienInvaders.length; i++) {
             squares[alienInvaders[i]].classList.remove('invader')
         }
-        for (let i = 0; i <= alienInvaders.length - 1; i++) {
+        for (let i = 0; i < alienInvaders.length; i++) {
             alienInvaders[i] += direction
         }
-        for (let i = 0; i <= alienInvaders.length - 1; i++) {
+        for (let i = 0; i < alienInvaders.length; i++) {
             if (!alienInvadersTakenDown.includes(i)) {
                 squares[alienInvaders[i]].classList.add('invader')
             }
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //decida a game over
         if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
-            resultDisplay.textContent = 'Game Over'
+            resultDisplay.textContent = 'Game Over' //if an invader touches the shooter
             squares[currentShooterIndex].classList.add('boom')
             clearInterval(invaderId)
         }
 
-        for (let i = 0; i <= alienInvaders.length - 1; i++) {
+        for (let i = 0; i < alienInvaders.length; i++) {
             if (alienInvaders[i] > (squares.length - (width - 1))) {
-                resultDisplay.textContent = 'Game Over'
+                resultDisplay.textContent = 'Game Over' //if it touches the bottom of the grid
                 clearInterval(invaderId)
             }
         }
@@ -111,8 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         document.addEventListener('keyup', e => {
-            if (e.keyCode === 32) {
-                laserId = setInterval(moveLaser, 100)
+            //if (e.keyCode === 32) {
+            //    laserId = setInterval(moveLaser, 100)
+            //}
+            switch (e.keyCode) {
+                case 32:
+                    laserId = setInterval(moveLaser, 100)
             }
         })
     }
