@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //move the shooter along a line
     function moveShooter(e) {
         squares[currentShooterIndex].classList.remove('shooter') //removes shooter class from div (position)
-        switch(e.keyCode) {
-            case 37:
+        switch(e.key) {
+            case 'ArrowLeft':
                 if (currentShooterIndex % width !== 0) currentShooterIndex -= 1 //moves shooter to the left if possible
                 break
-            case 39:
+            case 'ArrowRight':
                 if (currentShooterIndex % width < width - 1) currentShooterIndex += 1 //moves shooter to the right if possible
                 break
         }
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares[currentLaserIndex].classList.remove('invader')
                 squares[currentLaserIndex].classList.add('boom')
 
-                setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
+                setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 300)
                 clearInterval(laserId)
 
                 const alienTakeDown = alienInvaders.indexOf(currentLaserIndex)
@@ -110,13 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        document.addEventListener('keyup', e => {
-            switch (e.keyCode) {
-                case 32:
+        /*document.addEventListener('keyup', e => {
+            switch (e.key) {
+                case ' ':
                     laserId = setInterval(moveLaser, 100)
-                    break
             }
-        })
+        })*/
+        switch (e.key) {
+            case ' ':
+                laserId = setInterval(moveLaser, 100)
+        }
     }
 
     document.addEventListener('keyup', shoot)
